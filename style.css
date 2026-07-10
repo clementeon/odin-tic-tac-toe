@@ -1,0 +1,73 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+}
+
+body {
+	gap: 20px;
+	padding: 30px;;
+	height: min-content;
+	width: min-content;
+	display: grid;
+	grid-template:
+		"icon-x score" min-content
+		"board board" 1fr
+		"icon-o buttons" min-content /
+		1fr min-content;
+	justify-self: center;
+	align-items: center;
+}
+
+.cell {
+	height: 150px;
+	width: 150px;
+}
+
+#next {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+	flex-direction: column;	
+	background-color: orange;
+
+}
+
+#board {
+	position: relative;
+	width:min-content;
+	grid-area: board;
+	display: grid;
+	grid-template-columns: repeat(3, min-content);
+	gap: 20px;
+}
+
+#X {
+	grid-template: icon-x
+}
+
+#O {
+	grid-template: icon-o
+}
+
+#game-count {
+	grid-template: score;
+	text-align: end;
+}
+
+.side-buttons {
+	grid-template: buttons;
+}
+
+.player {
+	display: flex;
+	gap: 20px;
+}
+
+.side-buttons {
+	display: flex;
+	gap: 20px;
+}
