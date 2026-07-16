@@ -1,9 +1,24 @@
+:root.light{
+	--background: #f2f2f2;
+	--board-background: #333333;
+	--button-border: #777777;
+}
 * {
 	box-sizing: border-box;
 	margin: 0;
 }
 
 body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 20px;
+	gap: 20px;
+	background-color: var(--background);
+
+}
+
+.game {
 	gap: 20px;
 	padding: 30px;;
 	height: min-content;
@@ -16,13 +31,44 @@ body {
 		1fr min-content;
 	justify-self: center;
 	align-items: center;
+	border: 1px solid grey;
+	box-shadow: #777777;
+}
+
+#title {
+	grid-template: title;
 }
 
 .cell {
 	height: 150px;
 	width: 150px;
+	border-radius: 5px;
+	border: 1px solid var(--button-border);
+	font-size: clamp(16px, 5vw, 48px);
+	transition: transform 0.3s;
+
 }
 
+.cell:hover{
+	transform: scale(1.15);
+}
+
+.cell:disabled:hover {
+    transform: none;
+}
+
+.cell:disabled {
+	transform: none;
+	background-color: #f2f2f2;
+}
+
+.x {
+	color: blue;
+}
+
+.o {
+	color: red;
+}
 #next {
 	position: absolute;
 	width: 100%;
@@ -33,6 +79,7 @@ body {
 	gap: 20px;
 	flex-direction: column;	
 	background-color: orange;
+	z-index: 999;
 
 }
 
@@ -42,30 +89,40 @@ body {
 	grid-area: board;
 	display: grid;
 	grid-template-columns: repeat(3, min-content);
-	gap: 20px;
+	gap: 1px;
+	padding: 1px;
+	border-radius: 5px;
+	border-color: var(--button-border);
+	background-color: var(--button-border);
 }
 
 #X {
-	grid-template: icon-x
+	grid-area: icon-x;
 }
 
 #O {
-	grid-template: icon-o
+	grid-area: icon-o;
 }
 
 #game-count {
-	grid-template: score;
+	grid-area: score;
 	text-align: end;
 }
 
 .side-buttons {
-	grid-template: buttons;
+	grid-area: buttons;
 }
 
 .player {
 	display: flex;
-	gap: 20px;
+	gap: 10px;
 }
+
+.player p, #total-games {
+	font-size: large;
+}
+
+
 
 .side-buttons {
 	display: flex;

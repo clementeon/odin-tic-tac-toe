@@ -42,10 +42,10 @@ const gameboard = (() => {
 	};
 })();
 
-function createPlayer(piece) {
+function createPlayer(piece, colour) {
 	let playerPiece = piece;
 	let playerWins = 0;
-
+	let playerColour = colour;
 	const addWin = () => {
 		playerWins++;
 	};
@@ -57,7 +57,7 @@ function createPlayer(piece) {
 	const playPiece = () => {
 		return playerPiece;
 	};
-	return { numWins, addWin, playPiece };
+	return { numWins, addWin, playPiece, playerColour };
 }
 
 const gameController = (() => {
@@ -127,6 +127,7 @@ const displayController = (() => {
 				gameboard.addPiece(index, current.playPiece());
 
 				cell.innerHTML = current.playPiece();
+				cell.classList.add(current.playPiece().toLowerCase());
 
 				let temp = gameController.checkWin(gameboard.returnBoard());
 				if (temp) {
@@ -138,7 +139,7 @@ const displayController = (() => {
 					);
 					const winsDisplay = playerDisplay.querySelector(".wins");
 					winsDisplay.innerText = `Wins: ${current.numWins()}`;
-					
+
 					next.style.display = "flex";
 					disableCells();
 				} else if (gameController.checkDraw(gameboard.returnBoard())) {
@@ -152,14 +153,20 @@ const displayController = (() => {
 				} else {
 					current = playerX;
 				}
+				cell.disabled = true;
 			}
 		});
-	});
+		cell.addEventListener("mouseover", ()=> {
+			 
+		})
+	}		
+);
 
 	const cleanBoard = () => {
 		gameboard.clearBoard();
 		cells.forEach((cell, index) => {
 			cell.innerHTML = "";
+			cell.classList.remove("x", "o");
 		});
 		enableCells();
 	};
